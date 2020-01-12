@@ -1,5 +1,7 @@
 import numpy as np
 import pickle
+import os
+from os import path
 
 from state import State
 
@@ -119,6 +121,9 @@ class AIPlayer:
         return action
 
     def savePolicy(self):
+        
+        if not path.exists( "Optimal_Policy" ):
+            os.mkdir("Optimal_Policy")
         
         file = open( 'Optimal_Policy/P' + str(self.symbol), 'wb' )
         pickle.dump( self.estimations, file )
