@@ -1,3 +1,4 @@
 .ipynb_checkpoints/
 __pycache__/
 Optimal_Policy/
+.DS_Store
