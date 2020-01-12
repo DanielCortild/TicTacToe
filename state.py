@@ -73,11 +73,11 @@ class State:
             for j in range(3):
                 
                 if self.board[i, j] == 1:
-                    token = 'O'
+                    token = 'X'
                 if self.board[i, j] == 0:
                     token = ' '
                 if self.board[i, j] == -1:
-                    token = 'X'
+                    token = 'O'
                     
                 out += token + ' | '
                 
