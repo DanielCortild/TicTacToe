@@ -7,13 +7,13 @@ from state import State
 
 class AIPlayer:
     
-    def __init__ ( self, stepSize = 0.1, exploreRate=0.1 ):
+    def __init__ ( self, stepSize = 0.1, exp = 0 ):
         
         self.allStates = self.getAllStates()
         self.estimations = dict()
         
         self.stepSize = stepSize
-        self.exploreRate = exploreRate
+        self.exploreRate = exp
         
         self.states = []
 
@@ -135,6 +135,40 @@ class AIPlayer:
         self.estimations = pickle.load( file )
         file.close()
 
+class RandomPlayer:
+    
+    def __init__ ( self ):
+        
+        self.symbol = None
+        self.currentState = None
+    
+    def reset ( self ):
+        return None
+    
+    def setSymbol ( self, symbol ):
+        self.symbol = symbol
+    
+    def feedState ( self, state ):
+        self.currentState = state
+    
+    def feedReward ( self, reward ):
+        return None
+    
+    def takeAction(self):
+        
+        [i, j] = np.random.randint(3, size=2)
+        
+        if self.currentState.board[i, j] != 0:
+            return self.takeAction()
+        
+        return ( i, j, self.symbol ) 
+    
+    def savePolicy(self):
+        return
+
+    def loadPolicy(self):
+        return
+        
 class HumanPlayer:
     
     def __init__(self, stepSize = 0.1, exploreRate=0.1):
@@ -165,3 +199,9 @@ class HumanPlayer:
             return self.takeAction()
         
         return ( i, j, self.symbol )
+    
+    def savePolicy(self):
+        return
+
+    def loadPolicy(self):
+        return
