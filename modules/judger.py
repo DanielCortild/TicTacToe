@@ -1,4 +1,4 @@
-from state import State
+from modules.state import State
 
 class Judger:
     

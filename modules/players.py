@@ -11,7 +11,7 @@ from keras.layers import Dropout
 from keras.backend import reshape
 from keras.utils.np_utils import to_categorical
 
-from state import State
+from modules.state import State
 
 class AIPlayer:
     
