@@ -2,12 +2,20 @@ import numpy as np
 import pickle
 import os
 from os import path
+import pathlib
+
+import keras
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import Dropout
+from keras.backend import reshape
+from keras.utils.np_utils import to_categorical
 
 from state import State
 
 class AIPlayer:
     
-    def __init__ ( self, stepSize = 0.1, exp = 0 ):
+    def __init__ ( self, stepSize = 0.3, exp = 0 ):
         
         self.allStates = self.getAllStates()
         self.estimations = dict()
@@ -44,9 +52,8 @@ class AIPlayer:
         return allStates
         
     def reset ( self ):
-        
         self.states = []
-
+        
     def setSymbol ( self, symbol ):
         
         self.symbol = symbol
@@ -64,7 +71,6 @@ class AIPlayer:
                 self.estimations[hash] = 0.5
 
     def feedState ( self, state ):
-        
         self.states.append( state )
 
     def feedReward ( self, reward ):
@@ -125,15 +131,118 @@ class AIPlayer:
         if not path.exists( "Optimal_Policy" ):
             os.mkdir("Optimal_Policy")
         
-        file = open( 'Optimal_Policy/P' + str(self.symbol), 'wb' )
+        file = open( 'Optimal_Policy/AI' + str(self.symbol) + '.txt', 'wb' )
         pickle.dump( self.estimations, file )
         file.close()
 
     def loadPolicy(self):
         
-        file = open( 'Optimal_Policy/P' + str(self.symbol),'rb' )
-        self.estimations = pickle.load( file )
-        file.close()
+        if path.exists( 'Optimal_Policy/AI' + str(self.symbol) ):
+            file = open( 'Optimal_Policy/AI' + str(self.symbol) + '.txt','rb' )
+            self.estimations = pickle.load( file )
+            file.close()
+        
+class DLPlayer:
+    
+    def __init__ ( self, stepSize = 0.3, exp = 0 ):
+        
+        self.stepSize = stepSize
+        self.exploreRate = exp
+        
+        self.states = []
+        
+        model = Sequential()
+        
+        model.add( Dense( 27, activation='relu', input_shape = (9, ) ) )
+        model.add( Dense( 18, activation='relu' ) )
+        model.add( Dense( 1, activation='linear' ) )
+        
+        model.compile( loss = 'mean_absolute_error', optimizer = 'adam', metrics = ['accuracy'] )
+        
+        self.model = model
+        
+    def reset ( self ):
+        self.states = []
+
+    def setSymbol ( self, symbol ):
+        self.symbol = symbol
+
+    def feedState ( self, state ):
+        self.states.append( state )
+
+    def feedReward ( self, reward ):
+        
+        if len( self.states ) == 0:
+            return
+        
+        self.states = [ state.board.flatten() for state in self.states ]
+        
+        target = reward
+        
+        for i, latestState in enumerate( reversed( self.states ) ):
+            
+            v_s = self.model.predict( np.array( [latestState] ) )
+            
+            if i == len(self.states)-1:
+                v_s_tag = 0
+            else:
+                v_s_tag = self.model.predict( np.array( [self.states[i+1]] ) )
+                
+            target = np.array( v_s + self.stepSize * ( reward + v_s_tag - v_s ) )
+                
+            #target = ( 1 - self.stepSize ) * self.model.predict( np.array( [latestState] ) ) + self.stepSize * target
+            
+            self.model.fit( np.array( [latestState] ), target, verbose = 0 )
+            
+        self.states = []
+
+    def takeAction(self):
+        
+        state = self.states[-1]
+        
+        nextStates = []
+        nextPositions = []
+        
+        for i in range(3):
+            for j in range(3):
+                if state.board[i, j] == 0:
+                    nextPositions.append( [i, j] )
+                    nextStates.append( state.nextState( i, j, self.symbol ).board.flatten() )
+                    
+        if np.random.binomial(1, self.exploreRate):
+            
+            np.random.shuffle( nextPositions )
+            self.states = []
+            action = nextPositions[0]
+            action.append( self.symbol )
+            
+            return action
+        
+        max = -999
+        bestPos = -1
+        
+        for board, pos in zip( nextStates, nextPositions ):
+            
+            if max < self.model.predict( np.array( [board] ) ):
+                max = self.model.predict( np.array( [board] ) )
+                bestPos = pos
+            
+        action = bestPos
+        action.append( self.symbol )
+        
+        return action
+
+    def savePolicy(self):
+        
+        if not path.exists( "Optimal_Policy" ):
+            os.mkdir("Optimal_Policy")
+        
+        self.model.save( 'Optimal_Policy/models/DL' + str(self.symbol) )
+
+    def loadPolicy(self):
+        
+        if path.exists( 'Optimal_Policy/models/DL' + str(self.symbol) ):
+            self.model = keras.models.load_model( 'Optimal_Policy/DL' + str(self.symbol) )
 
 class RandomPlayer:
     
@@ -171,26 +280,27 @@ class RandomPlayer:
         
 class HumanPlayer:
     
-    def __init__(self, stepSize = 0.1, exploreRate=0.1):
+    def __init__ ( self ):
         
         self.symbol = None
         self.currentState = None
     
-    def reset(self):
+    def reset ( self ):
         return None
     
-    def setSymbol(self, symbol):
+    def setSymbol ( self, symbol ):
         self.symbol = symbol
     
-    def feedState(self, state):
+    def feedState ( self, state ):
         self.currentState = state
     
-    def feedReward(self, reward):
+    def feedReward ( self, reward ):
         return None
     
-    def takeAction(self):
+    def takeAction ( self ):
         
         data = int( input( "Indicate your position:" ) )
+        data = data - 1
         
         i = data // 3
         j = data % 3
@@ -200,8 +310,8 @@ class HumanPlayer:
         
         return ( i, j, self.symbol )
     
-    def savePolicy(self):
+    def savePolicy ( self ):
         return
 
-    def loadPolicy(self):
+    def loadPolicy ( self ):
         return

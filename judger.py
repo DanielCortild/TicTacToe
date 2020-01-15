@@ -53,15 +53,15 @@ class Judger:
         self.reset()
         self.feedCurrentState()
         
+        if show:
+            self.currentState.show()
+        
         while True:
             
             if self.currentPlayer == self.p1:
                 self.currentPlayer = self.p2
             else:
                 self.currentPlayer = self.p1
-                
-            if show:
-                self.currentState.show()
             
             [i, j, symbol] = self.currentPlayer.takeAction()
             
@@ -69,6 +69,9 @@ class Judger:
             hashValue = self.currentState.getHash()
             
             self.feedCurrentState()
+            
+            if show:
+                self.currentState.show()
             
             if self.currentState.isEnd():
                 

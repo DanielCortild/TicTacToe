@@ -63,25 +63,24 @@ class State:
         return newState
 
     def show ( self ):
-        
-        out = ''
-        
-        for i in range(3):
-            
-            out += '-------------\n| '
-            
-            for j in range(3):
                 
+        for i in range(3):
+
+            print( '-------------' )
+
+            out= '| '
+
+            for j in range(3):
+
                 if self.board[i, j] == 1:
                     token = 'X'
                 if self.board[i, j] == 0:
                     token = ' '
                 if self.board[i, j] == -1:
                     token = 'O'
-                    
+
                 out += token + ' | '
-                
-            out += '\n'
-            
-        out += '-------------\n'
-        print(out)
+            print( out )
+
+        print( '-------------')
+        
