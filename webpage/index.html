@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Tic Tac Toe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="js/scripts.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container" id="outer">
+
+        <div id="mainTitle" align="center">
+            Tic Tac Toe
+        </div>
+
+        <div class="row" id="chooser" align="center">
+
+            <div class="col-xs-6" style="font-size:20px">
+                Choose
+            </div>
+
+            <div class="col-xs-3">
+                <button class="btn btn-primary" id="X_chooser">X</button>
+            </div>
+
+            <div class="col-xs-3">
+                <button class="btn btn-primary" id="O_chooser">O</button>
+            </div>
+
+        </div>
+
+        <div id="game" align="center">
+
+            <div class="row">
+                <button class="col-xs-4 squares" id="1"></button>
+                <button class="col-xs-4 squares" id="2"></button>
+                <button class="col-xs-4 squares" id="3"></button>
+            </div>
+
+            <div class="row">
+                <button class="col-xs-4 squares" id="4"></button>
+                <button class="col-xs-4 squares" id="5"></button>
+                <button class="col-xs-4 squares" id="6"></button>
+            </div>
+
+            <div class="row">
+                <button class="col-xs-4 squares" id="7"></button>
+                <button class="col-xs-4 squares" id="8"></button>
+                <button class="col-xs-4 squares" id="9"></button>
+            </div>
+
+        </div>
+
+        <div id="result" align="center">
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

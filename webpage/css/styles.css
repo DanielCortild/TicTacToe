@@ -1,0 +1,62 @@
+body{
+    background:#0d3d56;
+    color: white;
+    font-family:Trebuchet MS;
+  }
+
+#outer{
+  width:40%;
+  margin-top:50px;
+}
+
+#game{
+  border-style:none;
+  height:300px;
+  width:300px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:30px;
+}
+
+.row{
+  height:100px;
+}
+
+.col-xs-4{
+  border-style:solid;
+  height:100px;
+}
+
+.squares{
+  font-size:70px;
+  background:#d3b53d;
+}
+
+#result{
+  padding-top:30px;
+  font-size:30px;
+}
+
+#chooser{
+  padding-top:40px;
+  display: inline-block;
+  margin-left: 60px;
+  margin-right:auto;
+}
+
+#mainTitle{
+  font-family:Trebuchet MS;
+  font-size:50px;
+}
+
+.btn-primary{
+  background: #d3b53d;
+  border-style:none;
+  font-size: 15px;
+}
+.btn-primary:hover{
+  background: #bca136;
+}
+.squares:hover{
+  background: #bca136;
+}
