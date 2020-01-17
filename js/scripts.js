@@ -1,3 +1,12 @@
+/*
+Created on: Friday December 17th of January 2020
+
+Author: Daniel Cortild (https://github.com/DanielCortild)
+
+TicTacToe JS
+Only a MinMax model is avaible atm
+*/
+
 $(document).ready(function() {
 
       function Move() {

@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Dec 20 12:21:03 2019
+Created on: Friday December 17th of January 2020
 
-@author: daniel
+Author: Daniel Cortild (https://github.com/DanielCortild)
 
-ProgressBar
+ProgressBar Module
 """
+
 import sys
 
 def progress ( count, total, status1='', status2='', bar_len=30):
@@ -16,4 +17,4 @@ def progress ( count, total, status1='', status2='', bar_len=30):
     bar = '#' * filled_len + '-' * ( bar_len - filled_len )
 
     sys.stdout.write('%s [%s] %s\r' % (status1, bar, status2))
-    sys.stdout.flush() 
+    sys.stdout.flush()

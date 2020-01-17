@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-@author: daniel
+Created on: Friday December 17th of January 2020
 
-Functions
+Author: Daniel Cortild (https://github.com/DanielCortild)
+
+TicTacToe Compete
+Competition between models
 """
+
 from modules.players import AIPlayer, RandomPlayer, HumanPlayer, DLPlayer
 from modules.functions import compete
 

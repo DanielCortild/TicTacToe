@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-@author: daniel
+Created on: Friday December 17th of January 2020
 
-Functions
+Author: Daniel Cortild (https://github.com/DanielCortild)
+
+TicTacToe Functions Module
+Available Functions: train, compete, play
 """
+
 import numpy as np
 from modules.progress import progress
 from modules.judger import Judger
