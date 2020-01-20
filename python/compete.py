@@ -14,6 +14,8 @@ from modules.functions import compete
 
 import sys
 
+from moldules.getinput import getinput
+
 print( "Choose Players from: Rand, Q, DL" )
 P1_Label = input( "P1: " )
 P2_Label = input( "P2: " )

@@ -7,254 +7,267 @@ TicTacToe JS
 Only a MinMax model is avaible atm
 */
 
-$(document).ready(function() {
+var index = {
+  "c1": [0, 0],
+  "c2": [0, 1],
+  "c3": [0, 2],
+  "c4": [1, 0],
+  "c5": [1, 1],
+  "c6": [1, 2],
+  "c7": [2, 0],
+  "c8": [2, 1],
+  "c9": [2, 2]
+};
 
-      function Move() {
-        this.row = 0;
-        this.col = 0;
+
+function XChoose() {
+  AIPlayer = "O";
+  HumanPlayer = "X";
+
+  document.getElementById("O_chooser").style.opacity = 0.6;
+
+  mainBoard = resetGame();
+}
+
+function OChoose() {
+  AIPlayer = "X";
+  HumanPlayer = "O";
+
+  document.getElementById("X_chooser").style.opacity = 0.6;
+
+  mainBoard = resetGame();
+
+  AIPlay();
+}
+
+
+function resetGame() {
+  document.getElementById("result").style.opacity = 0;
+  document.getElementById("game").style.opacity = 1;
+
+  document.getElementById("X_chooser").onclick = '';
+  document.getElementById("O_chooser").onclick = '';
+
+  for (var i = 1; i <= 9; i++) {
+    document.getElementById("c"+i).onclick = function() { squareClick(this.id); };
+  }
+
+  mainBoard = [
+    ["_", "_", "_"],
+    ["_", "_", "_"],
+    ["_", "_", "_"]
+  ];
+
+  var keys = Object.keys( index );
+  for (var i = 0; i < keys.length; i++) {
+    document.getElementById(keys[i]).innerHTML = "";
+  }
+
+    return mainBoard;
+  }
+
+function checkGame() {
+  if ( getWinner( mainBoard ) === 10 ) {
+    endGame( "You lost!" );
+    return;
+  }
+  if ( getWinner( mainBoard ) === -10 ) {
+    endGame( "You win!" );
+    return;
+  }
+  if ( movesLeft( mainBoard ) === false ) {
+    endGame( "Draw!" );
+    return;
+  }
+}
+
+function movesLeft ( board ) {
+  return board.flat().includes("_");
+}
+
+function getWinner(board) {
+  for ( var row = 0; row < 3; row++ ) {
+    if ( board[row][0] === board[row][1] && board[row][1] === board[row][2] ) {
+      if ( board[row][0] === AIPlayer ) {
+        return +10;
+      } else if ( board[row][0] === HumanPlayer ) {
+        return -10;
       }
+    }
+  }
 
-      function movesLeft ( board ) {
-        return board.flat().includes("_");
+  for ( var col = 0; col < 3; col++ ) {
+    if ( board[0][col] === board[1][col] && board[1][col] === board[2][col] ) {
+      if ( board[0][col] === AIPlayer ) {
+        return +10;
+      } else if ( board[0][col] === HumanPlayer ) {
+        return -10;
       }
+    }
+  }
 
-      function win ( board ) {
-        for ( var row = 0; row < 3; row++ ) {
-          if ( board[row][0] === board[row][1] && board[row][1] === board[row][2] ) {
-            if ( board[row][0] === AIPlayer ) {
-              return +10;
-            } else if ( board[row][0] === HumanPlayer ) {
-              return -10;
-            }
-          }
-        }
+  if ( board[0][0] === board[1][1] && board[1][1] === board[2][2] ) {
+    if ( board[0][0] === AIPlayer ) {
+      return +10;
+    } else if ( board[0][0] === HumanPlayer ) {
+      return -10;
+    }
+  }
 
-        for ( var col = 0; col < 3; col++ ) {
-          if ( board[0][col] === board[1][col] && board[1][col] === board[2][col] ) {
-            if ( board[0][col] === AIPlayer ) {
-              return +10;
-            } else if ( board[0][col] === HumanPlayer ) {
-              return -10;
-            }
-          }
-        }
+  if ( board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
+    if ( board[0][2] === AIPlayer ) {
+      return +10;
+    } else if ( board[0][2] === HumanPlayer ) {
+      return -10;
+    }
+  }
 
-        if ( board[0][0] === board[1][1] && board[1][1] === board[2][2] ) {
-          if ( board[0][0] === AIPlayer ) {
-            return +10;
-          } else if ( board[0][0] === HumanPlayer ) {
-            return -10;
-          }
-        }
+  return 0;
+}
 
-        if ( board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
-          if ( board[0][2] === AIPlayer ) {
-            return +10;
-          } else if ( board[0][2] === HumanPlayer ) {
-            return -10;
-          }
-        }
+function endGame(message) {
+  document.getElementById("result").innerHTML = message;
+  document.getElementById("result").style.opacity = 1;
 
-        return 0;
-      }
+  document.getElementById("game").style.opacity = 0.6;
 
-      function minimax(board, depth, isMax) {
+  document.getElementById("X_chooser").style.opacity = 1;
+  document.getElementById("O_chooser").style.opacity = 1;
 
-        var score = win(board);
+  document.getElementById("X_chooser").onclick = function() { XChoose(); };
+  document.getElementById("O_chooser").onclick = function() { OChoose(); };
 
-        if (score === 10) {
-          return score;
-        }
+  for (var i = 1; i <= 9; i++) {
+    document.getElementById("c"+i).onclick = '';
+  }
+}
 
-        if (score === -10) {
-          return score;
-        }
 
-        if (movesLeft(board) === false) {
-          return 0;
-        }
+function Move() {
+  this.row = 0;
+  this.col = 0;
+}
 
-        if (isMax) {
-          var best = -1000;
+function minimax(board, depth, isMax) {
 
-          for (var i = 0; i < 3; i++) {
-            for (var j = 0; j < 3; j++) {
-              if (board[i][j] === "_") {
-                board[i][j] = AIPlayer;
+  var score = getWinner(board);
 
-                best = Math.max(best, minimax(board, depth + 1, !isMax));
-                //console.log(best);
+  if (score === 10) {
+    return score;
+  }
 
-                board[i][j] = "_";
-              }
-            }
-          }
+  if (score === -10) {
+    return score;
+  }
 
-          return best;
-        } else {
-          var best = 1000;
+  if (movesLeft(board) === false) {
+    return 0;
+  }
 
-          for (var i = 0; i < 3; i++) {
-            for (var j = 0; j < 3; j++) {
-              if (board[i][j] === "_") {
-                board[i][j] = HumanPlayer;
+  if (isMax) {
+    var best = -1000;
 
-                best = Math.min(best, minimax(board, depth + 1, !isMax));
-                // console.log(board);
+    for (var i = 0; i < 3; i++) {
+      for (var j = 0; j < 3; j++) {
+        if (board[i][j] === "_") {
+          board[i][j] = AIPlayer;
 
-                board[i][j] = "_";
-              }
-            }
-          }
+          best = Math.max(best, minimax(board, depth + 1, !isMax));
 
-          return best;
-        }
-
-      }
-
-      function findBestMove(board) {
-
-        var bestVal = -1000;
-        var bestMove = new Move();
-        bestMove.row = -1;
-        bestMove.col = -1;
-
-        for (var i = 0; i < 3; i++) {
-          for (var j = 0; j < 3; j++) {
-
-            if (board[i][j] === "_") {
-              board[i][j] = AIPlayer;
-
-              var moveVal = minimax(board, 0, false);
-
-              board[i][j] = "_";
-
-              // console.log(moveVal);
-              if (moveVal > bestVal) {
-                bestMove.row = i;
-                bestMove.col = j;
-                bestVal = moveVal;
-                // console.log(bestVal);
-
-              }
-            }
-
-          }
-        }
-
-        return bestMove;
-
-      }
-
-      function endGame(message) {
-        $("#result").html(message);
-        $("#game").fadeTo( 1000, 0.4 );
-        $("#chooser").fadeIn();
-        $("#result").fadeIn();
-        $(".squares").prop( "disabled", true );
-      }
-
-      function resetGame() {
-        $("#chooser").fadeOut();
-        $("#result").fadeOut();
-        $("#game").fadeTo( 1000, 1.0 );
-        $(".squares").prop( "disabled", false );
-
-        mainBoard = [
-          ["_", "_", "_"],
-          ["_", "_", "_"],
-          ["_", "_", "_"]
-        ];
-
-        var keys = Object.keys( index );
-        for (var i = 0; i < keys.length; i++) {
-          $("#" + keys[i]).html("");
-        }
-
-        return mainBoard;
-      }
-
-      function checkGame() {
-        if ( win( mainBoard ) === 10 ) {
-          endGame( "You lost!" )
-          return;
-        }
-        if ( win( mainBoard ) === -10 ) {
-          endGame( "You win!" )
-          return;
-        }
-        if ( movesLeft( mainBoard ) === false ) {
-          endGame( "Draw!" )
-          return;
+          board[i][j] = "_";
         }
       }
+    }
 
-      var index = {
-        "1": [0, 0],
-        "2": [0, 1],
-        "3": [0, 2],
-        "4": [1, 0],
-        "5": [1, 1],
-        "6": [1, 2],
-        "7": [2, 0],
-        "8": [2, 1],
-        "9": [2, 2]
-      };
+    return best;
+  } else {
+    var best = 1000;
 
-      $("#game").hide();
+    for (var i = 0; i < 3; i++) {
+      for (var j = 0; j < 3; j++) {
+        if (board[i][j] === "_") {
+          board[i][j] = HumanPlayer;
 
-      $(".squares").on("click", function() {
+          best = Math.min(best, minimax(board, depth + 1, !isMax));
 
-        var id = $(this).attr("id");
-        var arr = index[id];
-        if( mainBoard[arr[0]][arr[1]] !== "_" ){
-          return;
+          board[i][j] = "_";
         }
-        id = '#' + id;
-        $(id).html( HumanPlayer );
-        mainBoard[arr[0]][arr[1]] = HumanPlayer;
+      }
+    }
 
-        if ( win( mainBoard ) === -10 ) {
-          endGame( "You win!" )
-          return;
+    return best;
+  }
+
+}
+
+function findBestMove(board) {
+
+  var bestVal = -1000;
+  var bestMove = new Move();
+  bestMove.row = -1;
+  bestMove.col = -1;
+
+  for (var i = 0; i < 3; i++) {
+    for (var j = 0; j < 3; j++) {
+
+      if (board[i][j] === "_") {
+        board[i][j] = AIPlayer;
+
+        var moveVal = minimax(board, 0, false);
+
+        board[i][j] = "_";
+
+        // console.log(moveVal);
+        if (moveVal > bestVal) {
+          bestMove.row = i;
+          bestMove.col = j;
+          bestVal = moveVal;
+          // console.log(bestVal);
+
         }
-        if ( movesLeft( mainBoard ) === false ) {
-          endGame( "Draw!" )
-          return;
-        }
+      }
 
-        var nowMove = findBestMove(mainBoard);
-        var newId = 3 * nowMove.row + nowMove.col + 1;
-        $("#" + newId).html( AIPlayer );
-        mainBoard[nowMove.row][nowMove.col] = AIPlayer;
+    }
+  }
 
-        if (win(mainBoard) === 10) {
-          endGame( "You lost!" )
-          return;
-        }
-        if ( movesLeft(mainBoard) === false ) {
-          endGame( "Draw!" )
-          return;
-        }
-      });
+  return bestMove;
 
-      $( "#X_chooser" ).on( "click", function() {
-        AIPlayer = "O";
-        HumanPlayer = "X";
-        mainBoard = resetGame()
-      });
+}
 
-      $( "#O_chooser" ).on( "click", function() {
-        AIPlayer = "X";
-        HumanPlayer = "O";
-        mainBoard = resetGame()
+function AIPlay() {
+  var nowMove = findBestMove(mainBoard);
+  var newId = 3 * nowMove.row + nowMove.col + 1;
+  document.getElementById("c" + newId).innerHTML = AIPlayer;
+  mainBoard[nowMove.row][nowMove.col] = AIPlayer;
+}
 
-        var keys = Object.keys( index );
-        var rand = Math.floor(Math.random() * (keys.length + 1));
-        var arr = index[keys[rand]];
-        var id = 3 * arr[0] + arr[1] + 1;
-        $("#" + id).html(AIPlayer);
-        mainBoard[arr[0]][arr[1]] = AIPlayer;
-      });
 
-    });
+function squareClick(id) {
+  console.log(id);
+  var arr = index[id];
+  if( mainBoard[arr[0]][arr[1]] !== "_" ){
+   return;
+  }
+  document.getElementById(id).innerHTML = HumanPlayer;
+  mainBoard[arr[0]][arr[1]] = HumanPlayer;
+
+  if ( getWinner( mainBoard ) === -10 ) {
+    endGame( "You getWinner!" );
+    return;
+  }
+  if ( movesLeft( mainBoard ) === false ) {
+    endGame( "Draw!" );
+    return;
+  }
+
+  AIPlay();
+
+  if (getWinner(mainBoard) === 10) {
+    endGame( "You lost!" );
+    return;
+  }
+  if ( movesLeft(mainBoard) === false ) {
+    endGame( "Draw!" );
+    return;
+  }
+}

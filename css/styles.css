@@ -3,7 +3,7 @@ Created on: Friday December 17th of January 2020
 
 Author: Daniel Cortild (https://github.com/DanielCortild)
 
-TicTacToe CSS 
+TicTacToe CSS
 */
 
 body{
@@ -23,21 +23,42 @@ body{
   width:300px;
   margin-left:auto;
   margin-right:auto;
-  margin-top:30px;
+  margin-top:0px;
+
+  background-color: black;
+
+  opacity: 0;
+}
+
+.container{
+  text-align: center;
 }
 
 .row{
   height:100px;
 }
 
-.col-xs-4{
-  border-style:solid;
-  height:100px;
-}
-
 .squares{
+  border-style:solid;
+  height:110px;
+
   font-size:70px;
   background:#d3b53d;
+}
+.squares:hover{
+  background: #bca136;
+}
+#c1{
+  border-top-left-radius: 10px;
+}
+#c3{
+  border-top-right-radius: 10px;
+}
+#c7{
+  border-bottom-left-radius: 10px;
+}
+#c9{
+  border-bottom-right-radius: 10px;
 }
 
 #result{
@@ -46,10 +67,11 @@ body{
 }
 
 #chooser{
-  padding-top:40px;
+  padding-top:20px;
   display: inline-block;
-  margin-left: 60px;
+  margin-left: auto;
   margin-right:auto;
+
 }
 
 #mainTitle{
@@ -57,14 +79,16 @@ body{
   font-size:50px;
 }
 
-.btn-primary{
+.btn{
   background: #d3b53d;
   border-style:none;
   font-size: 15px;
+
+  margin-left:10px;
+  margin-right: 10px;
+
+  width: 50px;
 }
-.btn-primary:hover{
-  background: #bca136;
-}
-.squares:hover{
+.btn:hover{
   background: #bca136;
 }

@@ -16,5 +16,5 @@ def progress ( count, total, status1='', status2='', bar_len=30):
     percents = round( 100.0 * count / float( total ), 1 )
     bar = '#' * filled_len + '-' * ( bar_len - filled_len )
 
-    sys.stdout.write('%s [%s] %s\r' % (status1, bar, status2))
+    sys.stdout.write( '%s [%s] %s\r' % (status1, bar, status2) )
     sys.stdout.flush()
