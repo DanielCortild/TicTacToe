@@ -7,43 +7,72 @@ TicTacToe CSS
 */
 
 body{
-    background:#0d3d56;
-    color: white;
-    font-family:Trebuchet MS;
-  }
-
+  background:#0d3d56;
+  color:white;
+}
 #outer{
-  width:40%;
-  margin-top:50px;
-}
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
 
-#game{
-  border-style:none;
-  height:300px;
-  width:300px;
-  margin-left:auto;
-  margin-right:auto;
-  margin-top:0px;
-
-  background-color: black;
-
-  opacity: 0;
-}
-
-.container{
   text-align: center;
 }
 
-.row{
-  height:100px;
+#mainTitle{
+  font-size:50px;
 }
 
+#chooser{
+  padding-top:20px;
+  display: inline-block;
+  margin-bottom: -20px;
+}
+.chooser{
+  color: white;
+  background: #d3b53d;
+
+  border-style:none;
+
+  font-size: 15px;
+
+  margin-left:10px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+
+  width: 50px;
+  height: 30px;
+
+  border-radius: 5px;
+}
+.chooser:hover{
+  background: #bca136;
+}
+
+
+#game{
+  height:300px;
+  width:300px;
+
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:0px;
+}
+.row{
+  height:100px;
+
+  margin-left:auto;
+  margin-right:auto;
+
+  display:flex;
+}
 .squares{
   border-style:solid;
-  height:110px;
+  height:100px;
+  width: 100px;
 
-  font-size:70px;
-  background:#d3b53d;
+  font-size: 70px;
+  background: #d3b53d;
+  color: white;
 }
 .squares:hover{
   background: #bca136;
@@ -62,33 +91,6 @@ body{
 }
 
 #result{
-  padding-top:30px;
-  font-size:30px;
-}
-
-#chooser{
-  padding-top:20px;
-  display: inline-block;
-  margin-left: auto;
-  margin-right:auto;
-
-}
-
-#mainTitle{
-  font-family:Trebuchet MS;
-  font-size:50px;
-}
-
-.btn{
-  background: #d3b53d;
-  border-style:none;
-  font-size: 15px;
-
-  margin-left:10px;
-  margin-right: 10px;
-
-  width: 50px;
-}
-.btn:hover{
-  background: #bca136;
+  padding-top: 30px;
+  font-size: 30px;
 }

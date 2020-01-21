@@ -7,6 +7,10 @@ TicTacToe JS
 Only a MinMax model is avaible atm
 */
 
+window.onload = function() {
+  document.getElementById("game").style.opacity = 0;
+}
+
 var index = {
   "c1": [0, 0],
   "c2": [0, 1],

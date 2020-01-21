@@ -7,17 +7,14 @@ TicTacToe HTML
 -->
 
 <!doctype html>
-<html lang="en">
+<html>
 
   <head>
       <title>TicTacToe</title>
       <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="icon" href="logo.png">
 
       <script src="js/scripts.js" type="text/javascript"></script>
-
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-
       <link rel="stylesheet" href="css/styles.css" type="text/css">
 
   </head>
@@ -26,40 +23,39 @@ TicTacToe HTML
 
       <div class="container" id="outer">
 
-          <div id="mainTitle" align="center">TicTacToe</div>
+          <div id="mainTitle">TicTacToe</div>
 
           <div class="row" id="chooser" align="center">
 
-              <button class="btn col-xs-3" id="X_chooser" onclick="XChoose()">X</button>
+              <button class="chooser" id="X_chooser" onclick="XChoose()">X</button>
 
-              <button class="btn col-xs-3" id="O_chooser" onclick="OChoose()">O</button>
-
-
-          </div>
-
-          <div id="game" align="center">
-
-              <div class="row">
-                  <button class="col-xs-4 squares" id="c1"></button>
-                  <button class="col-xs-4 squares" id="c2"></button>
-                  <button class="col-xs-4 squares" id="c3"></button>
-              </div>
-
-              <div class="row">
-                  <button class="col-xs-4 squares" id="c4"></button>
-                  <button class="col-xs-4 squares" id="c5"></button>
-                  <button class="col-xs-4 squares" id="c6"></button>
-              </div>
-
-              <div class="row">
-                  <button class="col-xs-4 squares" id="c7"></button>
-                  <button class="col-xs-4 squares" id="c8"></button>
-                  <button class="col-xs-4 squares" id="c9"></button>
-              </div>
+              <button class="chooser" id="O_chooser" onclick="OChoose()">O</button>
 
           </div>
 
-          <div id="result" align="center">
+          <div id="game">
+
+              <div class="row">
+                  <button class="squares" id="c1"></button>
+                  <button class="squares" id="c2"></button>
+                  <button class="squares" id="c3"></button>
+              </div>
+
+              <div class="row">
+                  <button class="squares" id="c4"></button>
+                  <button class="squares" id="c5"></button>
+                  <button class="squares" id="c6"></button>
+              </div>
+
+              <div class="row">
+                  <button class="squares" id="c7"></button>
+                  <button class="squares" id="c8"></button>
+                  <button class="squares" id="c9"></button>
+              </div>
+
+          </div>
+
+          <div id="result">
 
           </div>
 
