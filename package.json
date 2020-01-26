@@ -1,0 +1,19 @@
+{
+  "name": "tictactoe",
+  "version": "1.0.0",
+  "description": "The .html file (with the files in /css and /js) create a website: https://danielcortild.github.io/TicTacToe/ This website uses a MinMax model written in JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielCortild/TicTacToe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanielCortild/TicTacToe/issues"
+  },
+  "homepage": "https://github.com/DanielCortild/TicTacToe#readme"
+}

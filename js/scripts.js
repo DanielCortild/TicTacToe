@@ -7,8 +7,15 @@ TicTacToe JS
 Only a MinMax model is avaible atm
 */
 
+//var obj = require('./file.json');
+
+var moment = require("moment");
+var tfjs = require("tensorflow");
+
+}
 window.onload = function() {
   document.getElementById("game").style.opacity = 0;
+  console.log(moment(new Date()).format("LL"));
 }
 
 var index = {
@@ -67,8 +74,8 @@ function resetGame() {
     document.getElementById(keys[i]).innerHTML = "";
   }
 
-    return mainBoard;
-  }
+  return mainBoard;
+}
 
 function checkGame() {
   if ( getWinner( mainBoard ) === 10 ) {
@@ -221,13 +228,10 @@ function findBestMove(board) {
 
         board[i][j] = "_";
 
-        // console.log(moveVal);
         if (moveVal > bestVal) {
           bestMove.row = i;
           bestMove.col = j;
           bestVal = moveVal;
-          // console.log(bestVal);
-
         }
       }
 
