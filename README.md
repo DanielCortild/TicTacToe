@@ -10,3 +10,6 @@ TO-DO:
 -Rename Players to Agents
 -Link QAgent to JS
 -Link DLAgent to JS
+
+
+CHANGE README FILE (Has moved python part)
