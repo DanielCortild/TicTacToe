@@ -4,6 +4,7 @@
   "description": "The .html file (with the files in /css and /js) create a website: https://danielcortild.github.io/TicTacToe/ This website uses a MinMax model written in JS",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
