@@ -5,17 +5,23 @@ Author: Daniel Cortild (https://github.com/DanielCortild)
 
 TicTacToe JS
 Only a MinMax model is avaible atm
+
+To use Browserify (Allows usage of 'require'):
+browserify js/scripts.js -o js/bundle.js
+
+To transform .h5 file created by the python script:
+tensorflowjs_converter --input_format=keras models/PyModels/DL1.h5 models/JSModels/
+
+To start Live-Server using npx:
+npx live-server
 */
 
-//var obj = require('./file.json');
+var AIPlayer = '';
+var HumanPlayer = '';
+var mainBoard = '';
 
-var moment = require("moment");
-var tfjs = require("tensorflow");
-
-}
 window.onload = function() {
   document.getElementById("game").style.opacity = 0;
-  console.log(moment(new Date()).format("LL"));
 }
 
 var index = {
@@ -39,6 +45,7 @@ function XChoose() {
 
   mainBoard = resetGame();
 }
+window.XChoose = XChoose;
 
 function OChoose() {
   AIPlayer = "X";
@@ -50,6 +57,7 @@ function OChoose() {
 
   AIPlay();
 }
+window.OChoose = OChoose;
 
 
 function resetGame() {
@@ -237,9 +245,7 @@ function findBestMove(board) {
 
     }
   }
-
   return bestMove;
-
 }
 
 function AIPlay() {
@@ -251,7 +257,6 @@ function AIPlay() {
 
 
 function squareClick(id) {
-  console.log(id);
   var arr = index[id];
   if( mainBoard[arr[0]][arr[1]] !== "_" ){
    return;
