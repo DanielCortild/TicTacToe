@@ -16,6 +16,8 @@ To start Live-Server using npx:
 npx live-server
 */
 
+const modelURL = './models/JSModels/model.json'
+
 var AIPlayer = '';
 var HumanPlayer = '';
 var mainBoard = '';
@@ -55,7 +57,8 @@ function OChoose() {
 
   mainBoard = resetGame();
 
-  AIPlay();
+  //AIPlay();
+  moveAI();
 }
 window.OChoose = OChoose;
 
@@ -256,7 +259,7 @@ function AIPlay() {
 }
 
 
-function squareClick(id) {
+async function squareClick(id) {
   var arr = index[id];
   if( mainBoard[arr[0]][arr[1]] !== "_" ){
    return;
@@ -265,7 +268,7 @@ function squareClick(id) {
   mainBoard[arr[0]][arr[1]] = HumanPlayer;
 
   if ( getWinner( mainBoard ) === -10 ) {
-    endGame( "You getWinner!" );
+    endGame( "You win!" );
     return;
   }
   if ( movesLeft( mainBoard ) === false ) {
@@ -273,7 +276,8 @@ function squareClick(id) {
     return;
   }
 
-  AIPlay();
+  //AIPlay();
+  await moveAI();
 
   if (getWinner(mainBoard) === 10) {
     endGame( "You lost!" );
