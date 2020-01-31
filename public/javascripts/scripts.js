@@ -27,21 +27,26 @@ window.onload = function() {
 }
 
 var index = {
-  "c1": [0, 0],
-  "c2": [0, 1],
-  "c3": [0, 2],
-  "c4": [1, 0],
-  "c5": [1, 1],
-  "c6": [1, 2],
-  "c7": [2, 0],
-  "c8": [2, 1],
-  "c9": [2, 2]
+  "c0": 0,
+  "c1": 1,
+  "c2": 2,
+  "c3": 3,
+  "c4": 4,
+  "c5": 5,
+  "c6": 6,
+  "c7": 7,
+  "c8": 8
 };
+
+var tokens = {
+  "-1": "O",
+  "1" : "X"
+}
 
 
 function XChoose() {
-  AIPlayer = "O";
-  HumanPlayer = "X";
+  AIPlayer = -1;
+  HumanPlayer = 1;
 
   document.getElementById("O_chooser").style.opacity = 0.6;
 
@@ -50,15 +55,15 @@ function XChoose() {
 window.XChoose = XChoose;
 
 function OChoose() {
-  AIPlayer = "X";
-  HumanPlayer = "O";
+  AIPlayer = 1;
+  HumanPlayer = -1;
 
   document.getElementById("X_chooser").style.opacity = 0.6;
 
   mainBoard = resetGame();
 
   //AIPlay();
-  moveAI();
+  moveDL();
 }
 window.OChoose = OChoose;
 
@@ -70,15 +75,11 @@ function resetGame() {
   document.getElementById("X_chooser").onclick = '';
   document.getElementById("O_chooser").onclick = '';
 
-  for (var i = 1; i <= 9; i++) {
+  for (var i = 0; i < 9; i++) {
     document.getElementById("c"+i).onclick = function() { squareClick(this.id); };
   }
 
-  mainBoard = [
-    ["_", "_", "_"],
-    ["_", "_", "_"],
-    ["_", "_", "_"]
-  ];
+  mainBoard = [0,0,0,0,0,0,0,0,0];
 
   var keys = Object.keys( index );
   for (var i = 0; i < keys.length; i++) {
@@ -104,42 +105,42 @@ function checkGame() {
 }
 
 function movesLeft ( board ) {
-  return board.flat().includes("_");
+  return board.flat().includes(0);
 }
 
 function getWinner(board) {
-  for ( var row = 0; row < 3; row++ ) {
-    if ( board[row][0] === board[row][1] && board[row][1] === board[row][2] ) {
-      if ( board[row][0] === AIPlayer ) {
+  for ( var i = 0; i < 3; i++ ) {
+    if ( board[3*i] === board[3*i+1] && board[3*i+1] === board[3*i+2] ) {
+      if ( board[3*i] === AIPlayer ) {
         return +10;
-      } else if ( board[row][0] === HumanPlayer ) {
+      } else if ( board[3*i] === HumanPlayer ) {
         return -10;
       }
     }
   }
 
-  for ( var col = 0; col < 3; col++ ) {
-    if ( board[0][col] === board[1][col] && board[1][col] === board[2][col] ) {
-      if ( board[0][col] === AIPlayer ) {
+  for ( var i = 0; i < 3; i++ ) {
+    if ( board[i] === board[3+i] && board[3+i] === board[6+i] ) {
+      if ( board[i] === AIPlayer ) {
         return +10;
-      } else if ( board[0][col] === HumanPlayer ) {
+      } else if ( board[i] === HumanPlayer ) {
         return -10;
       }
     }
   }
 
-  if ( board[0][0] === board[1][1] && board[1][1] === board[2][2] ) {
-    if ( board[0][0] === AIPlayer ) {
+  if ( board[0] === board[4] && board[4] === board[8] ) {
+    if ( board[0] === AIPlayer ) {
       return +10;
-    } else if ( board[0][0] === HumanPlayer ) {
+    } else if ( board[0] === HumanPlayer ) {
       return -10;
     }
   }
 
-  if ( board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
-    if ( board[0][2] === AIPlayer ) {
+  if ( board[2] === board[4] && board[4] === board[6]) {
+    if ( board[2] === AIPlayer ) {
       return +10;
-    } else if ( board[0][2] === HumanPlayer ) {
+    } else if ( board[2] === HumanPlayer ) {
       return -10;
     }
   }
@@ -159,7 +160,7 @@ function endGame(message) {
   document.getElementById("X_chooser").onclick = function() { XChoose(); };
   document.getElementById("O_chooser").onclick = function() { OChoose(); };
 
-  for (var i = 1; i <= 9; i++) {
+  for (var i = 0; i < 9; i++) {
     document.getElementById("c"+i).onclick = '';
   }
 }
@@ -191,12 +192,12 @@ function minimax(board, depth, isMax) {
 
     for (var i = 0; i < 3; i++) {
       for (var j = 0; j < 3; j++) {
-        if (board[i][j] === "_") {
+        if (board[i][j] === 0) {
           board[i][j] = AIPlayer;
 
           best = Math.max(best, minimax(board, depth + 1, !isMax));
 
-          board[i][j] = "_";
+          board[i][j] = 0;
         }
       }
     }
@@ -207,12 +208,12 @@ function minimax(board, depth, isMax) {
 
     for (var i = 0; i < 3; i++) {
       for (var j = 0; j < 3; j++) {
-        if (board[i][j] === "_") {
+        if (board[i][j] === 0) {
           board[i][j] = HumanPlayer;
 
           best = Math.min(best, minimax(board, depth + 1, !isMax));
 
-          board[i][j] = "_";
+          board[i][j] = 0;
         }
       }
     }
@@ -232,12 +233,12 @@ function findBestMove(board) {
   for (var i = 0; i < 3; i++) {
     for (var j = 0; j < 3; j++) {
 
-      if (board[i][j] === "_") {
+      if (board[i][j] === 0) {
         board[i][j] = AIPlayer;
 
         var moveVal = minimax(board, 0, false);
 
-        board[i][j] = "_";
+        board[i][j] = 0;
 
         if (moveVal > bestVal) {
           bestMove.row = i;
@@ -261,11 +262,11 @@ function AIPlay() {
 
 async function squareClick(id) {
   var arr = index[id];
-  if( mainBoard[arr[0]][arr[1]] !== "_" ){
+  if( mainBoard[arr] !== 0 ){
    return;
   }
-  document.getElementById(id).innerHTML = HumanPlayer;
-  mainBoard[arr[0]][arr[1]] = HumanPlayer;
+  document.getElementById(id).innerHTML = tokens[HumanPlayer];
+  mainBoard[arr] = HumanPlayer;
 
   if ( getWinner( mainBoard ) === -10 ) {
     endGame( "You win!" );
@@ -277,7 +278,7 @@ async function squareClick(id) {
   }
 
   //AIPlay();
-  await moveAI();
+  await moveDL();
 
   if (getWinner(mainBoard) === 10) {
     endGame( "You lost!" );

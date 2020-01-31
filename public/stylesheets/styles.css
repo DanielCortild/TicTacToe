@@ -77,16 +77,16 @@ body{
 .squares:hover{
   background: #bca136;
 }
-#c1{
+#c0{
   border-top-left-radius: 10px;
 }
-#c3{
+#c2{
   border-top-right-radius: 10px;
 }
-#c7{
+#c6{
   border-bottom-left-radius: 10px;
 }
-#c9{
+#c8{
   border-bottom-right-radius: 10px;
 }
 
