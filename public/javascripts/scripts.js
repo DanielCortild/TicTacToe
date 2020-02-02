@@ -17,6 +17,7 @@ npx live-server
 */
 
 const modelURL = './models/JSModels/model.json'
+var mode;
 
 var AIPlayer = '';
 var HumanPlayer = '';
@@ -48,24 +49,24 @@ function XChoose() {
   AIPlayer = -1;
   HumanPlayer = 1;
 
+  mode = document.getElementById("selection").value ;
   document.getElementById("O_chooser").style.opacity = 0.6;
 
   mainBoard = resetGame();
 }
-window.XChoose = XChoose;
 
 function OChoose() {
   AIPlayer = 1;
   HumanPlayer = -1;
 
+  mode = document.getElementById("selection").value ;
   document.getElementById("X_chooser").style.opacity = 0.6;
 
   mainBoard = resetGame();
 
-  //AIPlay();
-  moveDL();
+  move(mode);
+
 }
-window.OChoose = OChoose;
 
 
 function resetGame() {
@@ -166,100 +167,6 @@ function endGame(message) {
 }
 
 
-function Move() {
-  this.row = 0;
-  this.col = 0;
-}
-
-function minimax(board, depth, isMax) {
-
-  var score = getWinner(board);
-
-  if (score === 10) {
-    return score;
-  }
-
-  if (score === -10) {
-    return score;
-  }
-
-  if (movesLeft(board) === false) {
-    return 0;
-  }
-
-  if (isMax) {
-    var best = -1000;
-
-    for (var i = 0; i < 3; i++) {
-      for (var j = 0; j < 3; j++) {
-        if (board[i][j] === 0) {
-          board[i][j] = AIPlayer;
-
-          best = Math.max(best, minimax(board, depth + 1, !isMax));
-
-          board[i][j] = 0;
-        }
-      }
-    }
-
-    return best;
-  } else {
-    var best = 1000;
-
-    for (var i = 0; i < 3; i++) {
-      for (var j = 0; j < 3; j++) {
-        if (board[i][j] === 0) {
-          board[i][j] = HumanPlayer;
-
-          best = Math.min(best, minimax(board, depth + 1, !isMax));
-
-          board[i][j] = 0;
-        }
-      }
-    }
-
-    return best;
-  }
-
-}
-
-function findBestMove(board) {
-
-  var bestVal = -1000;
-  var bestMove = new Move();
-  bestMove.row = -1;
-  bestMove.col = -1;
-
-  for (var i = 0; i < 3; i++) {
-    for (var j = 0; j < 3; j++) {
-
-      if (board[i][j] === 0) {
-        board[i][j] = AIPlayer;
-
-        var moveVal = minimax(board, 0, false);
-
-        board[i][j] = 0;
-
-        if (moveVal > bestVal) {
-          bestMove.row = i;
-          bestMove.col = j;
-          bestVal = moveVal;
-        }
-      }
-
-    }
-  }
-  return bestMove;
-}
-
-function AIPlay() {
-  var nowMove = findBestMove(mainBoard);
-  var newId = 3 * nowMove.row + nowMove.col + 1;
-  document.getElementById("c" + newId).innerHTML = AIPlayer;
-  mainBoard[nowMove.row][nowMove.col] = AIPlayer;
-}
-
-
 async function squareClick(id) {
   var arr = index[id];
   if( mainBoard[arr] !== 0 ){
@@ -277,8 +184,7 @@ async function squareClick(id) {
     return;
   }
 
-  //AIPlay();
-  await moveDL();
+  await move(mode);
 
   if (getWinner(mainBoard) === 10) {
     endGame( "You lost!" );
