@@ -1,18 +1,26 @@
 function moveQ() {
-  const data = require('../models/test.json');
+  let model;
+  if( AIPlayer === 1 && mode === 'Q' ) {
+    model = JSON.parse(JSON.stringify(model_Q_P1));
+  } else if ( AIPlayer === -1 && mode === 'Q' ) {
+    model = JSON.parse(JSON.stringify(model_Q_P2));
+  } else if ( AIPlayer === 1 && mode === 'Q400000' ) {
+    model = JSON.parse(JSON.stringify(model_Q400000_P1));
+  } else if ( AIPlayer === -1 && mode === 'Q400000' ) {
+    model = JSON.parse(JSON.stringify(model_Q400000_P2));
+  }
   [nextBoards, positions] = possibleMoves(AIPlayer);
   maxVal = -999;
   maxMove = -1;
   for(b=0; b<nextBoards.length; b++) {
-    if( data[ 'H'+toHash(nextBoards[b]) ] > maxVal ) {
-      maxVal = data[ 'H'+toHash(nextBoards[b]) ];
+    if( model[ 'H'+toHash(nextBoards[b]) ] > maxVal ) {
+      maxVal = model[ 'H'+toHash(nextBoards[b]) ];
       maxMove = positions[b];
     }
   }
   document.getElementById("c" + maxMove).innerHTML = tokens[AIPlayer];
   mainBoard[maxMove] = AIPlayer;
 }
-window.moveQ = moveQ;
 
 async function moveDL() {
   let model = await tf.loadLayersModel(modelURL);
@@ -28,7 +36,6 @@ async function moveDL() {
   document.getElementById("c" + maxMove).innerHTML = tokens[AIPlayer];
   mainBoard[maxMove] = AIPlayer;
 }
-window.moveDL = moveDL;
 
 function moveMM() {
   var bestVal = -999;
@@ -44,7 +51,6 @@ function moveMM() {
   document.getElementById("c" + bestMove).innerHTML = tokens[AIPlayer];
   mainBoard[bestMove] = AIPlayer;
 }
-window.moveMM = moveMM;
 
 function minmax(board, depth, isMax) {
   var score = getWinner(board);

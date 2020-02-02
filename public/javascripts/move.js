@@ -22,7 +22,7 @@ function toHash(board) {
 }
 
 function move(mode) {
-  if(mode === "Q") {
+  if(mode === "Q" || mode === "Q400000") {
     moveQ();
   }
   if(mode === "DL") {
