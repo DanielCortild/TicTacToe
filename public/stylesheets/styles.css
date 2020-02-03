@@ -27,7 +27,7 @@ body{
 #selection{
   position: relative;
   display: block;
-  width: 50%;
+  width: 200px;
   height: 30px;
   margin: 0 auto;
   margin-top: 10px;
@@ -76,6 +76,8 @@ body{
   margin-left:auto;
   margin-right:auto;
   margin-top:0px;
+
+  opacity: 0;
 }
 .row{
   height:100px;

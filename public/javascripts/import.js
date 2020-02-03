@@ -1,11 +1,19 @@
-var model_Q_P1 = require('../models/QModels/Q/Player1/model.json');
-var model_Q_P2 = require('../models/QModels/Q/Player2/model.json');
+var QModels = {};
 
-var model_Q400000_P1 = require('../models/QModels/Q400000/Player1/model.json');
-var model_Q400000_P2 = require('../models/QModels/Q400000/Player2/model.json');
+QModels["Q-Agent #1"] = {};
+QModels["Q-Agent #1"]["P1"] = require('../models/QModels/Q1/Player1/model.json');
+QModels["Q-Agent #1"]["P2"] = require('../models/QModels/Q1/Player2/model.json');
 
-window.model_Q_P1 = model_Q_P1;
-window.model_Q_P2 = model_Q_P2;
+QModels["Q-Agent #2"] = {};
+QModels["Q-Agent #2"]["P1"] = require('../models/QModels/Q2/Player1/model.json');
+QModels["Q-Agent #2"]["P2"] = require('../models/QModels/Q2/Player2/model.json');
 
-window.model_Q400000_P1 = model_Q400000_P1;
-window.model_Q400000_P2 = model_Q400000_P2;
+window.QModels = QModels;
+
+var DLModels = {};
+
+DLModels["DL Agent #1"] = {};
+DLModels["DL Agent #1"]["P1"] = '../models/DLModels/DL1/Player1/model.json';
+DLModels["DL Agent #1"]["P2"] = '../models/DLModels/DL1/Player2/model.json';
+
+window.DLModels = DLModels;

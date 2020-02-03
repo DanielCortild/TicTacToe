@@ -22,13 +22,13 @@ function toHash(board) {
 }
 
 function move(mode) {
-  if(mode === "Q" || mode === "Q400000") {
+  if(mode.includes("Q")) {
     moveQ();
   }
-  if(mode === "DL") {
+  if(mode.includes("DL")) {
     moveDL();
   }
-  if(mode === "MM") {
+  if(mode.includes("MM")) {
     moveMM();
   }
 }

@@ -1,8 +1,8 @@
 {
   "name": "tictactoe",
   "version": "1.0.0",
-  "description": "The .html file (with the files in /css and /js) create a website: https://danielcortild.github.io/TicTacToe/ This website uses a MinMax model written in JS",
-  "main": "index.js",
+  "description": "Web Environement to simulate python trained TicTacToe models",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,13 +18,9 @@
   },
   "homepage": "https://github.com/DanielCortild/TicTacToe#readme",
   "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "node-sass-middleware": "0.11.0"
+    "http-errors": "~1.6.3"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.1",

@@ -18,3 +18,13 @@ heroku open
 
 When Website is running locally, go to:
 http://localhost:5000/
+
+Models:
+
+MinMax - BruteForce, 0% LR
+
+Q1 - Unknown Epochs, ..% LR
+
+Q2 - 400000 Epochs, 0% LR
+
+DL - Unknown Epochs, ..% LR

@@ -1,14 +1,11 @@
 function moveQ() {
   let model;
-  if( AIPlayer === 1 && mode === 'Q' ) {
-    model = JSON.parse(JSON.stringify(model_Q_P1));
-  } else if ( AIPlayer === -1 && mode === 'Q' ) {
-    model = JSON.parse(JSON.stringify(model_Q_P2));
-  } else if ( AIPlayer === 1 && mode === 'Q400000' ) {
-    model = JSON.parse(JSON.stringify(model_Q400000_P1));
-  } else if ( AIPlayer === -1 && mode === 'Q400000' ) {
-    model = JSON.parse(JSON.stringify(model_Q400000_P2));
+  if( AIPlayer === 1  ) {
+    model = JSON.parse(JSON.stringify( QModels[mode]["P1"] ) );
+  } else if ( AIPlayer === -1 ) {
+    model = JSON.parse(JSON.stringify( QModels[mode]["P2"] ) );
   }
+
   [nextBoards, positions] = possibleMoves(AIPlayer);
   maxVal = -999;
   maxMove = -1;
@@ -23,7 +20,12 @@ function moveQ() {
 }
 
 async function moveDL() {
-  let model = await tf.loadLayersModel(modelURL);
+  let model;
+  if( AIPlayer === 1  ) {
+    model = await tf.loadLayersModel(DLModels[mode]["P1"]);
+  } else if ( AIPlayer === -1 ) {
+    model = await tf.loadLayersModel(DLModels[mode]["P2"]);
+  }
 
   [nextBoards, positions] = possibleMoves(AIPlayer);
   nextBoardsTensor = tf.tensor(nextBoards);
@@ -54,10 +56,10 @@ function moveMM() {
 
 function minmax(board, depth, isMax) {
   var score = getWinner(board);
-  if (score === 10) {
+  if (score === 1) {
     return score;
   }
-  if (score === -10) {
+  if (score === -1) {
     return score;
   }
   if (movesLeft(board) === false) {
