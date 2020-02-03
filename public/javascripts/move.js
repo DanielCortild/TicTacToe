@@ -1,3 +1,8 @@
+/*
+Created on: Friday December 17th of January 2020
+Author: Daniel Cortild (https://github.com/DanielCortild)
+*/
+
 function possibleMoves(Player) {
   possibleBoards = [];
   positions = [];

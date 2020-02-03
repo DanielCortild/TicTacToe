@@ -1,3 +1,14 @@
+/*
+Created on: Friday December 17th of January 2020
+Author: Daniel Cortild (https://github.com/DanielCortild)
+
+To transform this file to readable file by server:
+In ./public/javascripts, launch
+browserify import.js -o import_bundle.js
+
+To transform .h5 file created by the python script:
+tensorflowjs_converter --input_format=keras path/to/.h5 path/to/new/file
+*/
 var QModels = {};
 
 QModels["Q-Agent #1"] = {};

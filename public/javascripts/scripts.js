@@ -1,19 +1,6 @@
 /*
 Created on: Friday December 17th of January 2020
-
 Author: Daniel Cortild (https://github.com/DanielCortild)
-
-TicTacToe JS
-Only a MinMax model is avaible atm
-
-To use Browserify (Allows usage of 'require'):
-browserify js/scripts.js -o js/bundle.js
-
-To transform .h5 file created by the python script:
-tensorflowjs_converter --input_format=keras models/PyModels/DL1.h5 models/JSModels/
-
-To start Live-Server using npx:
-npx live-server
 */
 
 var AIPlayer, HumanPlayer, mainBoard, mode;

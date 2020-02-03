@@ -1,4 +1,15 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+/*
+Created on: Friday December 17th of January 2020
+Author: Daniel Cortild (https://github.com/DanielCortild)
+
+To transform this file to readable file by server:
+In ./public/javascripts, launch
+browserify import.js -o import_bundle.js
+
+To transform .h5 file created by the python script:
+tensorflowjs_converter --input_format=keras path/to/.h5 path/to/new/file
+*/
 var QModels = {};
 
 QModels["Q-Agent #1"] = {};

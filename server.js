@@ -1,3 +1,8 @@
+/*
+Created on: Friday December 17th of January 2020
+Author: Daniel Cortild (https://github.com/DanielCortild)
+*/
+
 var express = require('express');
 var path = require('path');
 var http = require('http');
