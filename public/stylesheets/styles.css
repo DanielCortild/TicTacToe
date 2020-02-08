@@ -13,9 +13,7 @@ body{
   margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
-
   width: 300px;
-
   text-align: center;
 }
 
@@ -23,58 +21,30 @@ body{
   font-size:50px;
 }
 
-.selection{
-  width: 70%;
+.clicker{
   height: 30px;
-  margin: 6px auto;
+  margin: 8px auto;
   font-size: 18px;
   color: #686868;
   background-color: #d3b53d;
+  border-style: none;
   border-radius: 5px;
   cursor: pointer;
 }
-
-
-.chooser{
-  color: white;
-  background: #d3b53d;
-  font-size: 15px;
-  margin: 6px 10px;
-  width: 50px;
-  height: 30px;
+.clicker:hover{
+  background: #bca136;
+}
+.fullwid {
+  width: 70%;
+}
+.halfwid{
+  margin-right: 4%;
+  margin-left: 4%;
+  padding: 0;
+  width: 30%;
   border-radius: 5px;
   cursor: pointer;
   border-color: red;
-  border-style: none;
-}
-.chooser:hover{
-  background: #bca136;
-}
-
-.button {
-  height: 100%;
-  background-color: #d3b53d;
-  border: none;
-  border-radius: 6px;
-  color: white;
-  font-size: 18px;
-  text-align: auto;
-}
-
-#play {
-  height: 30px;
-  margin: 6px auto;
-}
-.button2 {
-  width: 70%;
-}
-
-#replay {
-  height: 30px;
-  margin: 6px auto;
-}
-.button3 {
-  width: 35%;
 }
 
 #game{

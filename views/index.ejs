@@ -11,8 +11,7 @@ Author: Daniel Cortild (https://github.com/DanielCortild)
       <meta charset="utf-8">
 
       <!-- Import of external scripts -->
-      <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
-
+      <script src="javascripts/tf.min.js"></script>
       <script src="javascripts/jquery-3.4.1.js"></script>
 
       <!-- Linked files should be placed in ./public,
@@ -37,26 +36,26 @@ Author: Daniel Cortild (https://github.com/DanielCortild)
 
           <div id="options">
             <div>
-              <select class="selection" id="gridsize"></select>
+              <select class="clicker fullwid" id="gridsize"></select>
             </div>
             <div>
-              <select class="selection" id="agent"></select>
+              <select class="clicker fullwid" id="agent"></select>
             </div>
 
             <div id="chooser" align="center">
-                <button class="button chooser" id="X_chooser" onclick="XChoose()">X</button>
-                <button class="button chooser" id="O_chooser" onclick="OChoose()">O</button>
+                <button class="clicker halfwid" id="X_chooser" onclick="XChoose()">X</button>
+                <button class="clicker halfwid" id="O_chooser" onclick="OChoose()">O</button>
             </div>
 
             <div class="buttons">
-              <button class="button button2" id="playbutton" onclick="startClick()">Play</button>
+              <button class="clicker fullwid" id="playbutton" onclick="startClick()">Play</button>
             </div>
           </div>
 
           <div id="game">
-            <div class="buttons">
-              <button class="button button3" id="playbutton" onclick="restartClick()">RePlay</button>
-              <button class="button button3" id="reconfbutton" onclick="reconfigClick()">ReConf</button>
+            <div>
+              <button class="clicker halfwid" onclick="restartClick()">RePlay</button>
+              <button class="clicker halfwid" onclick="reconfigClick()">ReConf</button>
             </div>
           </div>
 
