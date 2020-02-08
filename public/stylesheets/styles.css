@@ -14,7 +14,7 @@ body{
   margin-left: auto;
   margin-right: auto;
 
-  width: 40%;
+  width: 300px;
 
   text-align: center;
 }
@@ -23,58 +23,65 @@ body{
   font-size:50px;
 }
 
-#selection{
-  position: relative;
-  display: block;
-  width: 200px;
+.selection{
+  width: 70%;
   height: 30px;
-  margin: 0 auto;
-  margin-top: 10px;
-  font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial', sans-serif;
+  margin: 6px auto;
   font-size: 18px;
   color: #686868;
   background-color: #d3b53d;
   border-radius: 5px;
-
   cursor: pointer;
 }
 
-#chooser{
-  padding-top:20px;
-  display: inline-block;
-  margin-bottom: -20px;
-}
+
 .chooser{
   color: white;
   background: #d3b53d;
-
-  border-style:none;
-
   font-size: 15px;
-
-  margin-left:10px;
-  margin-right: 10px;
-  margin-bottom: 0px;
-
+  margin: 6px 10px;
   width: 50px;
   height: 30px;
-
   border-radius: 5px;
-
   cursor: pointer;
+  border-color: red;
+  border-style: none;
 }
 .chooser:hover{
   background: #bca136;
 }
 
+.button {
+  height: 100%;
+  background-color: #d3b53d;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 18px;
+  text-align: auto;
+}
+
+#play {
+  height: 30px;
+  margin: 6px auto;
+}
+.button2 {
+  width: 70%;
+}
+
+#replay {
+  height: 30px;
+  margin: 6px auto;
+}
+.button3 {
+  width: 35%;
+}
 
 #game{
   height:300px;
   width:300px;
 
-  margin-left:auto;
-  margin-right:auto;
-  margin-top:0px;
+  margin: 6px auto;
 
   opacity: 0;
 }
@@ -97,18 +104,6 @@ body{
 }
 .squares:hover{
   background: #bca136;
-}
-#c0{
-  border-top-left-radius: 10px;
-}
-#c2{
-  border-top-right-radius: 10px;
-}
-#c6{
-  border-bottom-left-radius: 10px;
-}
-#c8{
-  border-bottom-right-radius: 10px;
 }
 
 #result{

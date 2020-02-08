@@ -4,44 +4,33 @@ Author: Daniel Cortild (https://github.com/DanielCortild)
 */
 
 function resetGame() {
-  mode = document.getElementById("selection").value ;
+  mode = $("#agent").val() ;
 
-  document.getElementById("result").style.opacity = 0;
-  document.getElementById("game").style.opacity = 1;
-
-  document.getElementById("X_chooser").onclick = '';
-  document.getElementById("O_chooser").onclick = '';
-
-  for (var i = 0; i < 9; i++) {
-    document.getElementById("c"+i).onclick = function() { squareClick(this.id); };
-  }
+  $("#result").css("opacity", 0);
+  $("#game").css("opacity", 1);
 
   mainBoard = [0,0,0,0,0,0,0,0,0];
 
   for (var i = 0; i < 9; i++) {
-    document.getElementById("c"+i).innerHTML = "";
+    $("#c"+i).html("");
   }
 
   return mainBoard;
 }
 
-function checkGame() {
-  if ( getWinner( mainBoard ) === 1 ) {
-    endGame( "You lose!" );
+function checkGame(board) {
+  if (getWinner(board) === 1) {
+    endGame("You lose!");
     return true;
   }
-  if ( getWinner( mainBoard ) === -1 ) {
-    endGame( "You win!" );
+  if (getWinner(board) === -1) {
+    endGame("You win!");
     return true;
   }
-  if ( movesLeft( mainBoard ) === false ) {
-    endGame( "Draw!" );
+  if (board.includes(0) === false) {
+    endGame("Draw!");
     return true;
   }
-}
-
-function movesLeft ( board ) {
-  return board.flat().includes(0);
 }
 
 function getWinner(board) {
@@ -85,18 +74,27 @@ function getWinner(board) {
 }
 
 function endGame(message) {
-  document.getElementById("result").innerHTML = message;
-  document.getElementById("result").style.opacity = 1;
+  $("#result").html(message);
+  $("#result").css("opacity", 1);
 
-  document.getElementById("game").style.opacity = 0.6;
-
-  document.getElementById("X_chooser").style.opacity = 1;
-  document.getElementById("O_chooser").style.opacity = 1;
-
-  document.getElementById("X_chooser").onclick = function() { XChoose(); };
-  document.getElementById("O_chooser").onclick = function() { OChoose(); };
+  $("#game").css("opacity", 0.6);
 
   for (var i = 0; i < 9; i++) {
     document.getElementById("c"+i).onclick = '';
   }
+}
+
+function possibleMoves(Player) {
+  possibleBoards = [];
+  positions = [];
+
+  for( i=0; i<9; i++ ) {
+    if(mainBoard[i] === 0) {
+      let copyBoard = JSON.parse(JSON.stringify(mainBoard));
+      copyBoard[i] = Player;
+      positions.push(i);
+      possibleBoards.push(copyBoard);
+    }
+  }
+  return [possibleBoards, positions];
 }

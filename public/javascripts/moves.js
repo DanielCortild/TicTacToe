@@ -3,6 +3,18 @@ Created on: Friday December 17th of January 2020
 Author: Daniel Cortild (https://github.com/DanielCortild)
 */
 
+function move(mode) {
+  if(mode.includes("Q")) {
+    moveQ();
+  }
+  if(mode.includes("DL")) {
+    moveDL();
+  }
+  if(mode.includes("MM")) {
+    moveMM();
+  }
+}
+
 function moveQ() {
   let model;
   if( AIPlayer === 1  ) {
@@ -67,7 +79,7 @@ function minmax(board, depth, isMax) {
   if (score === -1) {
     return score;
   }
-  if (movesLeft(board) === false) {
+  if (board.includes(0) === false) {
     return 0;
   }
   if (isMax) {
@@ -91,4 +103,12 @@ function minmax(board, depth, isMax) {
     }
     return best;
   }
+}
+
+function toHash(board) {
+  hashVal = 0;
+  for( i=0; i<board.length; i++ ) {
+    hashVal = 3*hashVal + ( (board[i]+3) %3 );
+  }
+  return hashVal;
 }

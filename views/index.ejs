@@ -13,14 +13,16 @@ Author: Daniel Cortild (https://github.com/DanielCortild)
       <!-- Import of external scripts -->
       <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
 
+      <script src="javascripts/jquery-3.4.1.js"></script>
+
       <!-- Linked files should be placed in ./public,
         but should be referenced without the ./public-->
       <link rel="icon" href="images/logo.png">
 
       <script src="javascripts/import_bundle.js"></script>
-      <script src="javascripts/move.js"></script>
+      <script src="javascripts/onload.js"></script>
+      <script src="javascripts/onclick.js"></script>
       <script src="javascripts/moves.js"></script>
-      <script src="javascripts/scripts.js"></script>
       <script src="javascripts/game.js"></script>
 
       <link rel="stylesheet" href="stylesheets/styles.css" type="text/css">
@@ -33,37 +35,29 @@ Author: Daniel Cortild (https://github.com/DanielCortild)
 
           <div id="mainTitle">TicTacToe</div>
 
-          <div>
-            <select id="selection">
-              <option value="MM">MinMax Agent</option>
-            </select>
-          </div>
+          <div id="options">
+            <div>
+              <select class="selection" id="gridsize"></select>
+            </div>
+            <div>
+              <select class="selection" id="agent"></select>
+            </div>
 
-          <div class="row" id="chooser" align="center">
-              <button class="chooser" id="X_chooser" onclick="XChoose()">X</button>
-              <button class="chooser" id="O_chooser" onclick="OChoose()">O</button>
+            <div id="chooser" align="center">
+                <button class="button chooser" id="X_chooser" onclick="XChoose()">X</button>
+                <button class="button chooser" id="O_chooser" onclick="OChoose()">O</button>
+            </div>
+
+            <div class="buttons">
+              <button class="button button2" id="playbutton" onclick="startClick()">Play</button>
+            </div>
           </div>
 
           <div id="game">
-
-              <div class="row">
-                  <button class="squares" id="c0"></button>
-                  <button class="squares" id="c1"></button>
-                  <button class="squares" id="c2"></button>
-              </div>
-
-              <div class="row">
-                  <button class="squares" id="c3"></button>
-                  <button class="squares" id="c4"></button>
-                  <button class="squares" id="c5"></button>
-              </div>
-
-              <div class="row">
-                  <button class="squares" id="c6"></button>
-                  <button class="squares" id="c7"></button>
-                  <button class="squares" id="c8"></button>
-              </div>
-
+            <div class="buttons">
+              <button class="button button3" id="playbutton" onclick="restartClick()">RePlay</button>
+              <button class="button button3" id="reconfbutton" onclick="reconfigClick()">ReConf</button>
+            </div>
           </div>
 
           <div id="result"></div>
