@@ -1,19 +1,18 @@
 /*
-Created on: Friday December 17th of January 2020
+Created on: Friday 17th of January 2020
 Author: Daniel Cortild (https://github.com/DanielCortild)
 */
 
 function resetGame() {
   mode = $("#agent").val() ;
 
-  $("#result").css("opacity", 0);
+  $("#result").hide();
+  $("#game").show();
   $("#game").css("opacity", 1);
 
-  mainBoard = [0,0,0,0,0,0,0,0,0];
+  mainBoard = new Array(BOARD_HEI*BOARD_WID).fill(0);
 
-  for (var i = 0; i < 9; i++) {
-    $("#c"+i).html("");
-  }
+  $(".squares").html("");
 
   return mainBoard;
 }
@@ -75,20 +74,16 @@ function getWinner(board) {
 
 function endGame(message) {
   $("#result").html(message);
-  $("#result").css("opacity", 1);
+  $("#result").show();
 
   $("#game").css("opacity", 0.6);
-
-  for (var i = 0; i < 9; i++) {
-    document.getElementById("c"+i).onclick = '';
-  }
 }
 
 function possibleMoves(Player) {
   possibleBoards = [];
   positions = [];
 
-  for( i=0; i<9; i++ ) {
+  for( i=0; i<BOARD_HEI*BOARD_WID; i++ ) {
     if(mainBoard[i] === 0) {
       let copyBoard = JSON.parse(JSON.stringify(mainBoard));
       copyBoard[i] = Player;

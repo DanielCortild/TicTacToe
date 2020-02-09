@@ -1,5 +1,5 @@
 /*
-Created on: Friday December 17th of January 2020
+Created on: Friday 17th of January 2020
 Author: Daniel Cortild (https://github.com/DanielCortild)
 */
 

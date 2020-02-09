@@ -1,5 +1,5 @@
 /*
-Created on: Friday December 17th of January 2020
+Created on: Friday 17th of January 2020
 Author: Daniel Cortild (https://github.com/DanielCortild)
 */
 
@@ -84,7 +84,7 @@ function minmax(board, depth, isMax) {
   }
   if (isMax) {
     var best = -1000;
-    for (var i = 0; i < 9; i++) {
+    for (var i = 0; i<board.length; i++) {
       if (board[i] === 0) {
         board[i] = AIPlayer;
         best = Math.max(best, minmax(board, depth + 1, !isMax));
@@ -94,7 +94,7 @@ function minmax(board, depth, isMax) {
     return best;
   } else {
     var best = 1000;
-    for (var i = 0; i < 9; i++) {
+    for (var i = 0; i<board.length; i++) {
       if (board[i] === 0) {
         board[i] = HumanPlayer;
         best = Math.min(best, minmax(board, depth + 1, !isMax));
@@ -107,8 +107,9 @@ function minmax(board, depth, isMax) {
 
 function toHash(board) {
   hashVal = 0;
+  base = Math.max(BOARD_HEI, BOARD_WID);
   for( i=0; i<board.length; i++ ) {
-    hashVal = 3*hashVal + ( (board[i]+3) %3 );
+    hashVal = base*hashVal + ( (board[i]+base) %base );
   }
   return hashVal;
 }

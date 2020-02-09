@@ -1,9 +1,9 @@
 /*
-Created on: Friday December 17th of January 2020
+Created on: Friday 17th of January 2020
 Author: Daniel Cortild (https://github.com/DanielCortild)
 */
 
-var AIPlayer, HumanPlayer, mainBoard, mode;
+var AIPlayer, HumanPlayer, mainBoard, GAME_MODE;
 var tokens = {
   "-1": "O",
   "1" : "X"
@@ -12,7 +12,7 @@ var BOARD_HEI = 3;
 var BOARD_WID = 3;
 
 $(function(){
-  $("#game").hide();
+  $("#gamecontainer").hide();
   loadGrids();
   loadAgents();
   loadGame();
@@ -37,7 +37,7 @@ function loadAgents () {
 }
 
 function loadGame () {
-  let k=0
+  let k=0;
   for(i=0; i<BOARD_HEI; i++) {
     let row = document.createElement("div");
     row.setAttribute("class", "row");

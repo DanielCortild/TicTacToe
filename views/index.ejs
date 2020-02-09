@@ -1,5 +1,5 @@
 <!--
-Created on: Friday December 17th of January 2020
+Created on: Friday 17th of January 2020
 Author: Daniel Cortild (https://github.com/DanielCortild)
 -->
 
@@ -11,8 +11,8 @@ Author: Daniel Cortild (https://github.com/DanielCortild)
       <meta charset="utf-8">
 
       <!-- Import of external scripts -->
-      <script src="javascripts/tf.min.js"></script>
-      <script src="javascripts/jquery-3.4.1.js"></script>
+      <script src="javascripts/deps/tf.min.js"></script>
+      <script src="javascripts/deps/jquery-3.4.1.js"></script>
 
       <!-- Linked files should be placed in ./public,
         but should be referenced without the ./public-->
@@ -35,12 +35,8 @@ Author: Daniel Cortild (https://github.com/DanielCortild)
           <div id="mainTitle">TicTacToe</div>
 
           <div id="options">
-            <div>
-              <select class="clicker fullwid" id="gridsize"></select>
-            </div>
-            <div>
-              <select class="clicker fullwid" id="agent"></select>
-            </div>
+            <select class="clicker fullwid" id="gridsize"></select>
+            <select class="clicker fullwid" id="agent"></select>
 
             <div id="chooser" align="center">
                 <button class="clicker halfwid" id="X_chooser" onclick="XChoose()">X</button>
@@ -52,11 +48,13 @@ Author: Daniel Cortild (https://github.com/DanielCortild)
             </div>
           </div>
 
-          <div id="game">
-            <div>
-              <button class="clicker halfwid" onclick="restartClick()">RePlay</button>
+          <div id="gamecontainer">
+            <div id="description"></div>
+            <div class="buttons">
+              <button class="clicker halfwid" onclick="startClick()">RePlay</button>
               <button class="clicker halfwid" onclick="reconfigClick()">ReConf</button>
             </div>
+            <div id="game"></div>
           </div>
 
           <div id="result"></div>
