@@ -18,10 +18,71 @@ function move(mode) {
   }
 }
 
+function play(position, player) {
+  document.getElementById("c" + position).innerHTML = tokens[player];
+  mainBoard[position] = player;
+}
+
 function moveS() {
+  //1. If there is a winning move, take it
   [nextBoards, positions] = possibleMoves(AIPlayer);
-  document.getElementById("c" + positions[0]).innerHTML = tokens[AIPlayer];
-  mainBoard[positions[0]] = AIPlayer;
+  for(board in nextBoards) {
+    if(getWinner(nextBoards[board]) === 1) {
+      play(positions[board], AIPlayer);
+      return;
+    }
+  }
+
+  //2. If your opponent has a winning move, take the move so he can’t take it
+  [nextBoards, positions] = possibleMoves(HumanPlayer);
+  for(board in nextBoards) {
+    if(getWinner(nextBoards[board]) === -1) {
+      play(positions[board], AIPlayer);
+      return;
+    }
+  }
+
+  //3. Take the center square over edges and corners
+  if(mainBoard[4] === 0) {
+    play(4, AIPlayer);
+    return;
+  }
+
+  //4. Take corner squares over edges
+  if(mainBoard[0] === 0) {
+    play(0, AIPlayer);
+    return;
+  }
+  if(mainBoard[2] === 0) {
+    play(2, AIPlayer);
+    return;
+  }
+  if(mainBoard[6] === 0) {
+    play(6, AIPlayer);
+    return;
+  }
+  if(mainBoard[8] === 0) {
+    play(8, AIPlayer);
+    return;
+  }
+
+  //5. Take edges if they are the only thing available
+  if(mainBoard[1] === 0) {
+    play(1, AIPlayer);
+    return;
+  }
+  if(mainBoard[3] === 0) {
+    play(3, AIPlayer);
+    return;
+  }
+  if(mainBoard[5] === 0) {
+    play(5, AIPlayer);
+    return;
+  }
+  if(mainBoard[7] === 0) {
+    play(7, AIPlayer);
+    return;
+  }
 }
 
 function moveQ() {
@@ -41,8 +102,7 @@ function moveQ() {
       maxMove = positions[b];
     }
   }
-  document.getElementById("c" + maxMove).innerHTML = tokens[AIPlayer];
-  mainBoard[maxMove] = AIPlayer;
+  play(maxMove, AIPlayer);
 }
 
 async function moveDL() {
@@ -61,8 +121,7 @@ async function moveDL() {
 
   maxMove = positions[predictions.indexOf(Math.max(...predictions))];
 
-  document.getElementById("c" + maxMove).innerHTML = tokens[AIPlayer];
-  mainBoard[maxMove] = AIPlayer;
+  play(maxMove, AIPlayer);
 }
 
 function moveMM() {
@@ -76,8 +135,7 @@ function moveMM() {
       bestVal = moveVal;
     }
   }
-  document.getElementById("c" + bestMove).innerHTML = tokens[AIPlayer];
-  mainBoard[bestMove] = AIPlayer;
+  play(bestMove, AIPlayer);
 }
 
 function minmax(board, isMax) {
