@@ -4,15 +4,24 @@ Author: Daniel Cortild (https://github.com/DanielCortild)
 */
 
 function move(mode) {
+  if(mode.includes("Stupid")) {
+    moveS();
+  }
   if(mode.includes("Q")) {
     moveQ();
   }
   if(mode.includes("DL")) {
     moveDL();
   }
-  if(mode.includes("MM")) {
+  if(mode.includes("MinMax")) {
     moveMM();
   }
+}
+
+function moveS() {
+  [nextBoards, positions] = possibleMoves(AIPlayer);
+  document.getElementById("c" + positions[0]).innerHTML = tokens[AIPlayer];
+  mainBoard[positions[0]] = AIPlayer;
 }
 
 function moveQ() {
@@ -61,7 +70,7 @@ function moveMM() {
   bestMove = -1;
   [possibleBoards, positions] = possibleMoves(AIPlayer);
   for (i in possibleBoards) {
-    var moveVal = minmax(possibleBoards[i], 0, false);
+    var moveVal = minmax(possibleBoards[i], false);
     if (moveVal > bestVal) {
       bestMove = positions[i];
       bestVal = moveVal;
@@ -71,7 +80,7 @@ function moveMM() {
   mainBoard[bestMove] = AIPlayer;
 }
 
-function minmax(board, depth, isMax) {
+function minmax(board, isMax) {
   var score = getWinner(board);
   if (score === 1) {
     return score;
@@ -83,25 +92,25 @@ function minmax(board, depth, isMax) {
     return 0;
   }
   if (isMax) {
-    var best = -1000;
+    var bestMax = -999;
     for (var i = 0; i<board.length; i++) {
       if (board[i] === 0) {
         board[i] = AIPlayer;
-        best = Math.max(best, minmax(board, depth + 1, !isMax));
+        bestMax = Math.max(bestMax, minmax(board, !isMax));
         board[i] = 0;
       }
     }
-    return best;
+    return bestMax;
   } else {
-    var best = 1000;
+    var bestMin = 999;
     for (var i = 0; i<board.length; i++) {
       if (board[i] === 0) {
         board[i] = HumanPlayer;
-        best = Math.min(best, minmax(board, depth + 1, !isMax));
+        bestMin = Math.min(bestMin, minmax(board, !isMax));
         board[i] = 0;
       }
     }
-    return best;
+    return bestMin;
   }
 }
 

@@ -14,24 +14,20 @@ function OChoose() {
   $("#X_chooser").css("border-style", "none");
   $("#O_chooser").css("border-style", "solid");
 }
-function startClick() {
-  let GridSize = $("#gridsize").val();
-  var BOARD_HEI = GridSize.substr(0, GridSize.indexOf('x'));
-  var BOARD_WID = GridSize.substr(GridSize.indexOf('x')+1, GridSize.length+1);
 
+async function startClick() {
+  loadGame();
   GAME_MODE = $("#agent").val();
-
   $("#options").hide();
   $("#gamecontainer").show();
-  $("#description").html(`GridSize: ${$("#gridsize").val()} <br>
-                          Oppenent: ${$("#agent").val()} <br>
-                          Your Color: ${tokens[HumanPlayer]}`);
-
-
+  $("#description").html(`Playing against <b>${$("#agent").val()}</b> as <b>${tokens[HumanPlayer]}</b>`);
   mainBoard = resetGame();
+  if(AIPlayer === 1) {
+    await move(GAME_MODE);
+  }
 }
 
-function reconfigClick() {
+function config() {
   $("#options").show();
   $("#gamecontainer").hide();
   $("#result").hide();
@@ -39,15 +35,12 @@ function reconfigClick() {
 
 async function squareClick(id) {
   id = parseInt(id.substr(1,id.length+1));
-  if( mainBoard[id] !== 0 ){
-    return;
-  }
+  if(mainBoard[id] !== 0) {return;}
+  if(checkGame(mainBoard)) {return;}
   $("#c"+id).html(tokens[HumanPlayer]);
   mainBoard[id] = HumanPlayer;
 
   if( checkGame(mainBoard) ) {return;}
-
   await move(GAME_MODE);
-
   if( checkGame(mainBoard) ) {return;}
 }

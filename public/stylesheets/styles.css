@@ -9,10 +9,8 @@ body{
   background:#0d3d56;
   color:white;
 }
-#outer{
-  margin-top: 50px;
-  margin-left: auto;
-  margin-right: auto;
+#container{
+  margin: 50px auto;
   width: 300px;
   text-align: center;
 }
@@ -35,21 +33,18 @@ body{
   background: #bca136;
 }
 .fullwid {
-  width: 70%;
+  width: 86%;
 }
 .halfwid{
   margin-right: 4%;
   margin-left: 4%;
   padding: 0;
-  width: 30%;
+  width: 38%;
   border-radius: 5px;
   cursor: pointer;
   border-color: white;
 }
 
-#description {
-  text-align: left;
-}
 #game{
   margin-top: 20px;
 }

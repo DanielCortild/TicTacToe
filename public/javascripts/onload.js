@@ -3,31 +3,20 @@ Created on: Friday 17th of January 2020
 Author: Daniel Cortild (https://github.com/DanielCortild)
 */
 
-var AIPlayer, HumanPlayer, mainBoard, GAME_MODE;
-var tokens = {
-  "-1": "O",
-  "1" : "X"
-}
-var BOARD_HEI = 3;
-var BOARD_WID = 3;
+var AIPlayer, HumanPlayer, mainBoard;
+var GAME_MODE, BOARD_HEI = 3, BOARD_WID = 3;
+var tokens = {"-1": "O", "1" : "X"};
 
 $(function(){
-  $("#gamecontainer").hide();
-  loadGrids();
   loadAgents();
-  loadGame();
-
+  config();
   XChoose();
 });
 
-function loadGrids () {
-  modeSelect = document.getElementById('gridsize');
-  modeSelect.options[modeSelect.options.length] = new Option("Grid 3x3", "3x3");
-}
-
 function loadAgents () {
   modeSelect = document.getElementById('agent');
-  modeSelect.options[modeSelect.options.length] = new Option("MinMax Agent", "MM");
+  modeSelect.options[modeSelect.options.length] = new Option("Stupid Agent", "Stupid Agent");
+  modeSelect.options[modeSelect.options.length] = new Option("MinMax Agent", "MinMax Agent");
   for(key in QModels) {
     modeSelect.options[modeSelect.options.length] = new Option(key, key);
   }
@@ -37,6 +26,7 @@ function loadAgents () {
 }
 
 function loadGame () {
+  $("#game").html("");
   let k=0;
   for(i=0; i<BOARD_HEI; i++) {
     let row = document.createElement("div");

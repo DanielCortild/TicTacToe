@@ -33,42 +33,54 @@ function checkGame(board) {
 }
 
 function getWinner(board) {
-  for ( var i = 0; i < 3; i++ ) {
-    if ( board[3*i] === board[3*i+1] && board[3*i+1] === board[3*i+2] ) {
-      if ( board[3*i] === AIPlayer ) {
-        return +1;
-      } else if ( board[3*i] === HumanPlayer ) {
-        return -1;
+
+  for (let i=0; i<BOARD_HEI; i++) {
+    for(let j=0; j<BOARD_WID-2; j++) {
+      if ( board[BOARD_WID*i+j] === board[BOARD_WID*i+j+1] && board[BOARD_WID*i+j+1] === board[BOARD_WID*i+j+2] ) {
+        if ( board[BOARD_WID*i+j] === AIPlayer ) {
+          return +1;
+        } else if ( board[BOARD_WID*i+j] === HumanPlayer ) {
+          return -1;
+        }
       }
     }
   }
 
-  for ( var i = 0; i < 3; i++ ) {
-    if ( board[i] === board[3+i] && board[3+i] === board[6+i] ) {
-      if ( board[i] === AIPlayer ) {
-        return +1;
-      } else if ( board[i] === HumanPlayer ) {
-        return -1;
+  for (let i=0; i<BOARD_WID; i++) {
+    for(let j=0; j<BOARD_HEI-2; j++) {
+      if ( board[BOARD_WID*j+i] === board[BOARD_WID*(j+1)+i] && board[BOARD_WID*(j+1)+i] === board[BOARD_WID*(j+2)+i] ) {
+        if ( board[BOARD_WID*j+i] === AIPlayer ) {
+          return +1;
+        } else if ( board[BOARD_WID*j+i] === HumanPlayer ) {
+          return -1;
+        }
       }
     }
   }
 
-  if ( board[0] === board[4] && board[4] === board[8] ) {
-    if ( board[0] === AIPlayer ) {
-      return +1;
-    } else if ( board[0] === HumanPlayer ) {
-      return -1;
+  for (let i=0; i<BOARD_WID-2; i++) {
+    for(let j=0; j<BOARD_HEI-2; j++) {
+      if ( board[BOARD_WID*j+i] === board[BOARD_WID*(j+1)+i+1] && board[BOARD_WID*(j+1)+i+1] === board[BOARD_WID*(j+2)+i+2] ) {
+        if ( board[BOARD_WID*j+i] === AIPlayer ) {
+          return +1;
+        } else if ( board[BOARD_WID*j+i] === HumanPlayer ) {
+          return -1;
+        }
+      }
     }
   }
 
-  if ( board[2] === board[4] && board[4] === board[6]) {
-    if ( board[2] === AIPlayer ) {
-      return +1;
-    } else if ( board[2] === HumanPlayer ) {
-      return -1;
+  for (let i=0; i<BOARD_WID-2; i++) {
+    for(let j=0; j<BOARD_HEI-2; j++) {
+      if ( board[BOARD_WID*j+i+2] === board[BOARD_WID*(j+1)+i+1] && board[BOARD_WID*(j+1)+i+1] === board[BOARD_WID*(j+2)+i] ) {
+        if ( board[BOARD_WID*j+i+2] === AIPlayer ) {
+          return +1;
+        } else if ( board[BOARD_WID*j+i+2] === HumanPlayer ) {
+          return -1;
+        }
+      }
     }
   }
-
   return 0;
 }
 

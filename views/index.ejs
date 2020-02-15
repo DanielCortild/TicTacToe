@@ -3,7 +3,7 @@ Created on: Friday 17th of January 2020
 Author: Daniel Cortild (https://github.com/DanielCortild)
 -->
 
-<!doctype html>
+<!DOCTYPE HTML>
 <html>
 
   <head>
@@ -16,7 +16,7 @@ Author: Daniel Cortild (https://github.com/DanielCortild)
 
       <!-- Linked files should be placed in ./public,
         but should be referenced without the ./public-->
-      <link rel="icon" href="images/logo.png">
+      <link rel="icon" href="images/grid.png">
 
       <script src="javascripts/import_bundle.js"></script>
       <script src="javascripts/onload.js"></script>
@@ -30,36 +30,35 @@ Author: Daniel Cortild (https://github.com/DanielCortild)
 
   <body>
 
-      <div class="container" id="outer">
+    <div id="container">
 
-          <div id="mainTitle">TicTacToe</div>
+      <div id="mainTitle">TicTacToe</div>
 
-          <div id="options">
-            <select class="clicker fullwid" id="gridsize"></select>
-            <select class="clicker fullwid" id="agent"></select>
+      <div id="options">
+        <select class="clicker fullwid" id="agent"></select>
 
-            <div id="chooser" align="center">
-                <button class="clicker halfwid" id="X_chooser" onclick="XChoose()">X</button>
-                <button class="clicker halfwid" id="O_chooser" onclick="OChoose()">O</button>
-            </div>
+        <div id="chooser" align="center">
+            <button class="clicker halfwid" id="X_chooser" onclick="XChoose()">X</button>
+            <button class="clicker halfwid" id="O_chooser" onclick="OChoose()">O</button>
+        </div>
 
-            <div class="buttons">
-              <button class="clicker fullwid" id="playbutton" onclick="startClick()">Play</button>
-            </div>
-          </div>
-
-          <div id="gamecontainer">
-            <div id="description"></div>
-            <div class="buttons">
-              <button class="clicker halfwid" onclick="startClick()">RePlay</button>
-              <button class="clicker halfwid" onclick="reconfigClick()">ReConf</button>
-            </div>
-            <div id="game"></div>
-          </div>
-
-          <div id="result"></div>
-
+        <div class="buttons">
+          <button class="clicker fullwid" id="playbutton" onclick="startClick()">Play</button>
+        </div>
       </div>
+
+      <div id="gamecontainer">
+        <div id="description"></div>
+        <div class="buttons">
+          <button class="clicker halfwid" onclick="startClick()">Replay</button>
+          <button class="clicker halfwid" onclick="config()">Reconfigure</button>
+        </div>
+        <div id="game"></div>
+      </div>
+
+      <div id="result"></div>
+
+    </div>
 
   </body>
 
